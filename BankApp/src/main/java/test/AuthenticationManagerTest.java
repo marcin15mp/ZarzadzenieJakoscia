@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 
 import java.sql.SQLException;
 
+import static biz.AuthenticationManager.hashPassword;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -47,7 +48,7 @@ public class AuthenticationManagerTest {
         authenticationManager = new AuthenticationManager(dao, bankHistory);
         Password password = new Password();
         password.setUserId(2);
-        password.setPasswd("anyPassword");
+        password.setPasswd(hashPassword("anyPassword".toCharArray()));
 
 
         Mockito.when(dao.findUserByName(any())).thenReturn(new User());
